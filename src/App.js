@@ -18,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>This is a wonderful technology!! Today is andrew wu's back to school night!</p>
       </header>
     </div>
   );
