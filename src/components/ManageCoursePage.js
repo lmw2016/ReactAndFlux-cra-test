@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import CourseForm from './common/CourseForm'
-import CoursesPage from './CoursesPage';
+import * as courseApi from "../api/courseApi";
+import { toast } from "react-toastify";
 // import { Prompt } from "react-router-dom";
 
 const ManageCoursePage=props=>{
@@ -12,6 +13,14 @@ const ManageCoursePage=props=>{
      authorId:null,
      category:""
    })
+
+   function handleSubmit(event){
+     event.preventDefault();
+     courseApi.saveCourse(course).then(()=>{
+       props.history.push("/courses");
+       toast.success('course saved!!')
+     });
+   }
 
   //  function handleTitleChange(event){
   //    const updatedCourse={...course,title:event.target.value};
@@ -31,7 +40,9 @@ const ManageCoursePage=props=>{
           {/* {props.match.params.slug} */}
           {/* <CourseForm course={course} onTitleChange={handleTitleChange} /> */}
 
-          <CourseForm course={course} onChange={handleChange} />
+          <CourseForm course={course} 
+          onChange={handleChange} 
+          onSubmit={handleSubmit} />
         </>
     )
 }
