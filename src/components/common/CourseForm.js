@@ -1,5 +1,6 @@
 import React from "react";
 import TextInput from './TextInput'
+import { Link } from 'react-router-dom';
 
 function CourseForm(props) {
   return (
@@ -43,7 +44,8 @@ function CourseForm(props) {
             error={props.errors.category}
           />
      
-      <input type="submit" value="Save" className="btn btn-primary" />
+      <input type="submit" value="Save" className="btn btn-primary" /> {' '}
+      <Link className="btn btn-primary" to="/courses">Go Back to Course list</Link>
     </form>
   );
 }
