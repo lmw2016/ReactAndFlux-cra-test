@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect } from 'react';
 import CourseForm from './common/CourseForm'
 import * as courseApi from "../api/courseApi";
 import { toast } from "react-toastify";
@@ -6,13 +6,20 @@ import { toast } from "react-toastify";
 
 const ManageCoursePage=props=>{
    const [errors,setErrors]=useState({});
-   const [course,setCourse]=useState({ //array destructing
-     Id:null,
-     slug:"",
-     title:"",
-     authorId:null,
-     category:""
-   })
+  const [course, setCourse] = useState(
+    { //array destructing
+      Id: null,
+      slug: "",
+      title: "",
+      authorId: null,
+      category: ""
+    }
+  );
+  
+  useEffect(() => {
+    const slug = props.match.params.slug;
+    courseApi.getCourseBySlug(slug).then(_course => setCourse(_course))
+  },[]);
 
    function formIsValid(){
      const _errors={};

@@ -1,6 +1,7 @@
 import React from "react";
 import TextInput from './TextInput'
 import { Link } from 'react-router-dom';
+import  PropTypes  from 'prop-types';
 
 function CourseForm(props) {
   return (
@@ -49,5 +50,12 @@ function CourseForm(props) {
     </form>
   );
 }
+
+CourseForm.propTypes = {
+  course: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
 
 export default CourseForm;
