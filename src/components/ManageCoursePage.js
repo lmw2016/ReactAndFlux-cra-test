@@ -18,7 +18,9 @@ const ManageCoursePage=props=>{
   
   useEffect(() => {
     const slug = props.match.params.slug;
-    courseApi.getCourseBySlug(slug).then(_course => setCourse(_course))
+    if (slug) {
+        courseApi.getCourseBySlug(slug).then(_course => setCourse(_course))
+      }
   },[]);
 
    function formIsValid(){
