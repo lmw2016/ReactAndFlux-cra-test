@@ -1,6 +1,5 @@
 import { EventEmitter } from "events";
 import dispatcher, { Dispatcher } from "../appDispatcher";
-import actionType from '../actions/actionTypes';
 import actionTypes from "../actions/actionTypes";
 
 const CHANGE_EVENT = "change";
@@ -12,7 +11,7 @@ class CourseStore extends EventEmitter {
     }
     
     removeChangeListener(callback) {
-        this.removeChangeListener(CHANGE_EVENT, callback);
+        this.removeListener(CHANGE_EVENT, callback); //not removeChangeListener
     }
 
     emitChange() {
@@ -34,6 +33,10 @@ dispatcher.register(action => {
     switch (action.actionType) {
         case actionTypes.CREATE_COURSE:
             _courses.push(action.course);
+            store.emitChange();
+            break;
+        case actionTypes.LOAD_COURSES:
+            _courses = action.courses;
             store.emitChange();
             break;
         default:
