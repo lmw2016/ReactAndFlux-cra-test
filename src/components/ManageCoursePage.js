@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const ManageCoursePage=props=>{
   const [errors, setErrors] = useState({});
-  const [courses, setCourses] =useState(courseStore.getCourses())
+  const [courses, setCourses] = useState(courseStore.getCourses());
   const [course, setCourse] = useState(
     { //array destructing
       Id: null,
