@@ -1,5 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function PerformanceList(props) {
     return (
@@ -18,11 +19,11 @@ function PerformanceList(props) {
                 {props.currentPerformances.map((perf, index) => {
                     return (<tr key={index+1}>
                         <th>{index + 1 + props.currentPage * props.perPage}</th>
-                        <th>{ new Date(perf.FlyDate).toLocaleString()}</th>
-                        <th><Link to={"/performance/"+perf.MktCarrierFlyNum}>{ perf.MktCarrierFlyNum}</Link></th>
-                        <th>{perf.MktCarrier}</th>
-                        <th>{ perf.OriginCity}</th>
-                        <th>{ perf.DestCityName}</th>
+                        <th>{ new Date(perf.flyDate).toLocaleString()}</th>
+                        <th><Link to={"/performance/"+perf.mktCarrierFlyNum}>{ perf.mktCarrierFlyNum}</Link></th>
+                        <th>{perf.mktCarrier}</th>
+                        <th>{ perf.originCity}</th>
+                        <th>{ perf.destCityName}</th>
                    </tr>)
                })} 
        
@@ -30,5 +31,21 @@ function PerformanceList(props) {
 </table>
    )
 }
+
+PerformanceList.propTypes = {
+    currentPerformances: PropTypes.arrayOf(
+        PropTypes.shape({
+            flyDate: PropTypes.string.isRequired,
+            mktCarrierFlyNum: PropTypes.string.isRequired,
+            mktCarrier: PropTypes.string.isRequired,
+            originCity: PropTypes.string.isRequired,
+            destCityName: PropTypes.string.isRequired,
+        })
+    ).isRequired
+};
+
+PerformanceList.defaultProps = {
+    currentPerformances: []
+};
 
 export default PerformanceList
