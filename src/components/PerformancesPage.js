@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { getPerformances } from "../api/performanceApi";
 import PerformanceList from "./PerformanceList";
 import ReactPaginate from 'react-paginate';
+import performanceStore from '../stores/performanceStore';
+import { loadPerformances} from '../actions/performanceActions';
 import "./App.css";
 
 
 const PER_PAGE = 11;
 
 function PerformancesPage() {
-    const [performances, setPerformances] = useState([]);
+    const [performances, setPerformances] = useState(performanceStore.getPerformances());
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
-        getPerformances().then(_performances => setPerformances(_performances));
+        performanceStore.addChangeListener(onChange);
+       if((performanceStore.getPerformances().length === 0)) loadPerformances();
+       return ()=>performanceStore.removeChangeListener(onChange);
     }, []);
+
+    function onChange() {
+        setPerformances(performanceStore.getPerformances());
+    }
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
@@ -23,15 +30,6 @@ function PerformancesPage() {
 
     const currentPagePerformances = performances
         .slice(offset, offset + PER_PAGE);
-        // .map((perf, index) => {
-        //     return (<tr key={index + 1}>
-        //         <th>{index + 1} &nbsp;</th>
-        //         <th>{new Date(perf.FlyDate).toLocaleString()}</th>
-        //         <th>{perf.MktCarrier}</th>
-        //         <th>{perf.OriginCity}</th>
-        //         <th>{perf.DestCityName}</th>
-        //     </tr>)
-        // });
     
     const pageCount = Math.ceil(performances.length / PER_PAGE);
     
