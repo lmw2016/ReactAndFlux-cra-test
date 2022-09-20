@@ -12,18 +12,20 @@ function PerformanceList(props) {
                     <th>Fly Number</th>
                     <th>Mkt Carrier</th>
                     <th>Origin City</th>
-            <th>Dest City</th>
+                    <th>Dest City</th>
+                    <th>Cancellation Reason (if any)</th>
         </tr>
     </thead>
     <tbody>
                 {props.currentPerformances.map((perf, index) => {
-                    return (<tr key={index+1}>
+                    return (<tr key={index + 1 + props.currentPage * props.perPage}>
                         <th>{index + 1 + props.currentPage * props.perPage}</th>
                         <th>{ new Date(perf.flyDate).toLocaleString()}</th>
                         <th><Link to={"/performance/"+perf.mktCarrierFlyNum}>{ perf.mktCarrierFlyNum}</Link></th>
                         <th>{perf.mktCarrier}</th>
                         <th>{ perf.originCity}</th>
-                        <th>{ perf.destCityName}</th>
+                        <th>{perf.destCityName}</th>
+                        <th style={{paddingLeft:'60px'}}>{ perf.cancelDesc}</th>
                    </tr>)
                })} 
        
@@ -40,6 +42,7 @@ PerformanceList.propTypes = {
             mktCarrier: PropTypes.string.isRequired,
             originCity: PropTypes.string.isRequired,
             destCityName: PropTypes.string.isRequired,
+            cancelDesc: PropTypes.string.isRequired
         })
     ).isRequired
 };
