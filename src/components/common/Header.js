@@ -12,6 +12,8 @@ function Header(){
             {" | "}
             <NavLink activeStyle={activeStyle} to="/performances">Performances</NavLink> 
             {" | "}
+            <NavLink activeStyle={activeStyle} to="/ImageOnScroll">ChangeImageOnScroll</NavLink> 
+            {" | "}
             <NavLink activeStyle={activeStyle} to="/about">About</NavLink>
         </nav>
     )
