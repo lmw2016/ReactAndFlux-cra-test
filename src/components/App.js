@@ -7,6 +7,7 @@ import PerformancesPage from "./PerformancesPage"
 import {Route, Switch,Redirect} from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 import ManageCoursePage from "./ManageCoursePage";
+import ManagePerformancePage from "./ManagePerformancePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ImageChangeOnScroll from "./forHooks/ImageChangeOnScroll";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" exact component={HomePage}/>
         <Route path="/courses" component={CoursesPage} />
         <Route path="/performances" component={PerformancesPage} />
+        <Route path="/performance/:mktCarrierFlyNum" component={ManagePerformancePage} />
         <Route path="/about" component={AboutPage}/>
         <Route path="/course/:slug" component={ManageCoursePage}/>
         <Route path="/course" component={ManageCoursePage}/>

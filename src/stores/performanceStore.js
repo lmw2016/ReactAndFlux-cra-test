@@ -22,6 +22,10 @@ class PerformanceStore extends EventEmitter {
         return _performances;
     }
 
+    getPerformanceByflyNum(flyNum) {
+        return _performances.find(p => p.mktCarrierFlyNum === flyNum);
+    }
+
 }
 
 const store = new PerformanceStore();
